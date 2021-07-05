@@ -1,0 +1,92 @@
+<html>
+	<head>
+		<title> calculator </title>
+		<script>
+			var calinfo = {'num1': 0, 'operator': '', 'num2': 0, 'result': 0};
+			function add(num) {
+				if (num == '+' || num == '-' || num == '*' || num == '/') {
+					calinfo.operator = num;
+				}
+				var display = document.getElementById("display");
+				display.value = display.value + num;
+			}
+			function calculate() {
+				if (calinfo.operator != '') {
+					var display = document.getElementById("display");
+					var strArray = display.value.split(calinfo.operator)
+					if (display.value.substr(0, 1) == calinfo.operator) {
+						calinfo.num1 = 0
+						calinfo.num2 = parseInt(strArray[1]);
+					}
+					else {
+						calinfo.num1 = parseInt(strArray[0]);
+						calinfo.num2 = parseInt(strArray[1]);
+					}
+					if (calinfo.operator == '+') {
+						calinfo.result = calinfo.num1 + calinfo.num2;
+					}
+					else if (calinfo.operator == '-') {
+						calinfo.result = calinfo.num1 - calinfo.num2;
+					}
+					else if (calinfo.operator == '*') {
+						calinfo.result = calinfo.num1 * calinfo.num2;
+					}
+					else if (calinfo.operator == '/') {
+						if (calinfo.num2 == 0)
+							alert("0으로 나눌 수 없습니다.");
+						else {
+							calinfo.result = calinfo.num1 / calinfo.num2;
+						}
+					}
+					var displayResult = document.getElementById("result");
+					displayResult.value = calinfo.result;
+					calinfo.operator = '';
+				}
+
+			}
+			function reset() {
+				var display = document.getElementById("display");
+				display.value = "";
+				var displayResult = document.getElementById("result");
+				displayResult.value = "";
+			}
+		</script>
+	</head>
+	<body>
+		<table border="1" width="150" height="200">
+			<tr>
+				<td colspan="4"><input type="text" id="display"/></td>
+			</tr>
+			<tr>
+				<td colspan="4"><input type="text" id="result"/></td>
+			</tr>
+			<tr>
+				<td colspan="3"><input type="button" id="ac" value="AC" style="width:100%; height=70px;" onclick="reset()"/></td>
+				<td><input type="button" id="division" value="/" style="width:100%; height=70px;" onclick="add('/')"/></td>
+			</tr>
+			<tr>
+				<td><input type="button" id="seven" value="7" style="width:100%; height=70px;" onclick="add('7')"/></td>
+				<td><input type="button" id="eight" value="8" style="width:100%; height=70px;" onclick="add('8')"/></td>
+				<td><input type="button" id="nine" value="9" style="width:100%; height=70px;" onclick="add('9')"/></td>
+				<td><input type="button" id="multiple" value="*" style="width:100%; height=70px;" onclick="add('*')"/></td>
+			</tr>
+			<tr>
+				<td><input type="button" id="four" value="4" style="width:100%; height=70px;" onclick="add('4')"/></td>
+				<td><input type="button" id="five" value="5" style="width:100%; height=70px;" onclick="add('5')"/></td>
+				<td><input type="button" id="six" value="6" style="width:100%; height=70px;" onclick="add('6')"/></td>
+				<td><input type="button" id="minus" value="-" style="width:100%; height=70px;" onclick="add('-')"/></td>
+			</tr>
+			<tr>
+				<td><input type="button" id="one" value="1" style="width:100%; height=70px;" onclick="add('1')"/></td>
+				<td><input type="button" id="two" value="2" style="width:100%; height=70px;" onclick="add('2')"/></td>
+				<td><input type="button" id="three" value="3" style="width:100%; height=70px;" onclick="add('3')"/></td>
+				<td><input type="button" id="plus" value="+" style="width:100%; height=70px;" onclick="add('+')"/></td>
+			</tr>
+			<tr>
+				<td colspan=2><input type="button" id="zero" value="0" style="width:100%; height=70px;" onclick="add('0')"/></td>
+				<td><input type="button" id="dot" value="." style="width:100%; height=70px;" onclick="add('.')"/></td>
+				<td><input type="button" id="operate" value="=" style="width:100%; height=70px;" onclick="calculate()"/></td>
+			</tr>
+		</table>
+	</body>
+</html>
